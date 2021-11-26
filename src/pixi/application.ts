@@ -6,7 +6,7 @@ import type { IViewportOptions } from "pixi-viewport";
 
 export class Application extends PIXI.Application {
 	element: Element | HTMLElement;
-	cull: Simple | SpatialHash = new Simple();
+	cull: Simple | SpatialHash = new SpatialHash();
 	viewport: Viewport = new Viewport();
 
 	constructor(node: Element | HTMLElement, options?: any) {
