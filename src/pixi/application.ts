@@ -1,13 +1,12 @@
 import * as PIXI from "pixi.js";
 import Stats from "stats.js";
-
 import { Viewport } from "pixi-viewport";
-import { SpatialHash } from "pixi-cull";
+import { Simple, SpatialHash } from "pixi-cull";
 import type { IViewportOptions } from "pixi-viewport";
 
 export class Application extends PIXI.Application {
 	element: Element | HTMLElement;
-	cull: SpatialHash = new SpatialHash();
+	cull: Simple | SpatialHash = new Simple();
 	viewport: Viewport = new Viewport();
 
 	constructor(node: Element | HTMLElement, options?: any) {
@@ -28,8 +27,9 @@ export class Application extends PIXI.Application {
 	}
 
 	private initCull() {
-		this.cull = new SpatialHash();
-		PIXI.Ticker.shared.add(this.cullTicker.bind(this));
+		// this.cull = new Simple();
+		// PIXI.Ticker.shared.add(this.cullTicker.bind(this));
+		this.renderer.on("prerender", this.cullTicker.bind(this));
 	}
 
 	private cullTicker() {
@@ -43,7 +43,8 @@ export class Application extends PIXI.Application {
 		const stats = new Stats();
 		if (node === true) document.body.appendChild(stats.dom);
 		else node.appendChild(stats.dom);
-		PIXI.Ticker.shared.add(stats.end);
+		PIXI.Ticker.system.add(stats.begin, {}, PIXI.UPDATE_PRIORITY.INTERACTION);
+		PIXI.Ticker.shared.add(stats.end, {}, PIXI.UPDATE_PRIORITY.UTILITY);
 	}
 
 	private initResizer() {
