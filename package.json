@@ -1,0 +1,22 @@
+{
+  "name": "pixi",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "serve": "vite preview"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10",
+    "@types/offscreencanvas": "^2019.6.4",
+    "@types/stats.js": "^0.17.0",
+    "typescript": "^4.3.2",
+    "vite": "^2.6.4"
+  },
+  "dependencies": {
+    "pixi-cull": "^2.1.0",
+    "pixi-viewport": "^4.34.1",
+    "pixi.js": "^6.2.0",
+    "stats.js": "^0.17.0"
+  }
+}
